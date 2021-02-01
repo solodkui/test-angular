@@ -1,9 +1,9 @@
-import { retry, share, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { AppState, mainStateGetOnlineStatus, mainStateGetAllNumber } from './reducers/index';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Observable, Subject, timer } from 'rxjs';
+import {  Observable, Subject, timer } from 'rxjs';
 import { setAllNumber } from './reducers/main/main.actions';
 
 @Injectable({
@@ -12,17 +12,8 @@ import { setAllNumber } from './reducers/main/main.actions';
 export class MainService {
   private stopPolling = new Subject();
   numbers: Array<number> = [];
-  // myNumber$: Subject<number>;
-  // requestCategory = 'cats';
-  // Math.floor(Math.random() * Math.floor(100))
 
   constructor(private http: HttpClient, private store: Store<AppState>) {
-    // timer(1, 500).pipe ( 
-    //   switchMap(() => this.createNumber()),
-    //   retry(),
-    //   share(),
-    //   takeUntil(this.stopPolling)
-    // );
   }
 
   createNumber(): Array<number> {
