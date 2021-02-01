@@ -1,0 +1,66 @@
+<section class="polling">
+  <div class="polling__wrapper">
+    <!-- Online status -->
+    <h1 class="polling__title">
+      <span>User status: </span>
+      <ng-container *ngIf="onlineStatus; else offline">
+        <span>Online</span>
+      </ng-container>
+      <ng-template #offline>
+        <span>Offline</span>
+      </ng-template>
+    </h1>
+
+    <!-- Change online status -->
+    <div class="polling__change-status">
+      <button
+        class="polling__change__button"
+        (click)="changeOnlineStatus(true)"
+      >
+        Online
+      </button>
+      <button
+        class="polling__change__button"
+        (click)="changeOnlineStatus(false)"
+      >
+        Offline
+      </button>
+    </div>
+
+    <!-- Polling config -->
+    <div class="polling__config">
+      <div class="polling__config__buttons">
+        <button class="polling__config__start" (click)="startPolling()">
+          Start polling
+        </button>
+        <button class="polling__config__start" (click)="stopPolling()">
+          Stop polling
+        </button>
+      </div>
+      <p class="polling__config__number">Number: {{ nowNumber || "-" }}</p>
+      <p class="polling__config__number">
+        <span>All numbers: </span>
+        <span *ngFor="let num of allNumbers"> {{ num }}, </span>
+      </p>
+    </div>
+
+    <!-- Search message -->
+    <div class="polling__search">
+      <span>Search message</span>
+      <input type="text" class="polling__search__input" (keydown.enter)="search($event.target.value)"/>
+      <!-- <button>Search</button> -->
+    </div>
+
+    <!-- message -->
+    <div class="polling__messages">
+      <ng-container *ngIf="messages.length; else elseTemplate">
+        <p *ngFor="let message of messages">
+          {{ message }}
+        </p>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <span>- No message -</span>
+      </ng-template>
+    </div>
+  </div>
+</section>
