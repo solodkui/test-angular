@@ -1,0 +1,32 @@
+<section class="dialogs">
+  <h2 class="dialogs__title">You: {{ dialog.author }}</h2>
+  <div class="dialogs__wrapper">
+    <div class="dialogs__sidebar">
+      <div
+        *ngFor="let chat of dialog.chats"
+        class="dialogs__sidebar__item"
+        (click)="changeDialog(chat.author)"
+      >
+        {{ chat.author }}
+      </div>
+    </div>
+    <div class="dialogs__content">
+      <ng-container class="dialogs__content__wrapper" *ngFor="let message of activeChat">
+        <ng-container *ngIf="message.direction === 'in'; else elseTemplate">
+          <div class="dialogs__content__item dialogs__content__item--right">
+            <span class="dialogs__content__author">{{ activeAuthor }}</span>
+            <p class="dialogs__content__body">{{ message.body }}</p>
+            <span class="dialogs__content__date">{{ message.date }}</span>
+          </div>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <div class="dialogs__content__item dialogs__content__item--left">
+            <span class="dialogs__content__author">{{ dialog.author }}</span>
+            <p class="dialogs__content__body">{{ message.body }}</p>
+            <span class="dialogs__content__date">{{ message.date }}</span>
+          </div>
+        </ng-template>
+      </ng-container>
+    </div>
+  </div>
+</section>

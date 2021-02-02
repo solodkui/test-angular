@@ -8,11 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { PollingComponent } from './polling/polling.component';
+import { DialogsComponent } from './dialogs/dialogs.component';
+import { ThemeModule } from './theme/theme.module';
+import { lightTheme } from './theme/light.theme';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PollingComponent
+    PollingComponent,
+    DialogsComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +31,10 @@ import { PollingComponent } from './polling/polling.component';
     }),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
+    }),
+    ThemeModule.forRoot({
+      themes: [lightTheme],
+      active: 'light'
     }),
   ],
   providers: [],
